@@ -5,7 +5,7 @@ import os
 
 #Set up Flask app and Redis connection
 app = Flask(__name__)
-app.secret_key = os.getenv('SECRET_KEY')  #Secure key for session management
+app.secret_key = os.getenv('SECRET_KEY', "fallback-secret")  #Secure key for session management
 r = redis.Redis(host='redis-db', port=6379, db=0, decode_responses=True)  #Connect to Redis
 
 #Route for displaying the song catalog with optional search

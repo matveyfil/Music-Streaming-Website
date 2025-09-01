@@ -7,7 +7,7 @@ import os
 #Initialize Flask app
 app = Flask(__name__)
 #Set a secret key for session management, retrieved from environment variables
-app.secret_key = os.getenv('SECRET_KEY')
+app.secret_key = os.getenv('SECRET_KEY', "fallback-secret")
 
 #Connect to Redis database
 r = redis.Redis(host='redis-db', port=6379, db=0, decode_responses=True)

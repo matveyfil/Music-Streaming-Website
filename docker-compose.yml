@@ -7,7 +7,7 @@ services:
     image: maflus/catalog:latest
     container_name: catalog-container
     environment:
-      - SECRET_KEY=43e7773873ae477e5a826985fb0937c3e0ab1976c6929b60
+    - SECRET_KEY=${SECRET_KEY}
     ports:
       - "5001:5000"
     volumes:
