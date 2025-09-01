@@ -20,7 +20,6 @@ logger = logging.getLogger("register-login-service")
 # Suppress unnecessary access logs from Werkzeug
 logging.getLogger("werkzeug").setLevel(logging.WARNING)
 
-logger.warning("=== TEST LOG: logger initialized correctly ===")
 
 #Initialize Flask app
 app = Flask(__name__)
