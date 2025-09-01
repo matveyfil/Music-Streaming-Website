@@ -14,19 +14,18 @@ COPY . .
 FROM python:3.12.0-slim
 WORKDIR /app
 
-# Copy built application from builder stage
+# Install dependencies again in slim image
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy app code
 COPY --from=builder /app /app
-COPY --from=builder /usr/local/lib/python3.12/site-packages /usr/local/lib/python3.12/site-packages
 
 # Create a non-privileged user
 RUN useradd -m myuser && chown -R myuser /app
 USER myuser
 
-# Expose the application port
 EXPOSE 5004
+ENV FLASK_TEMPLATE_FOLDER=/app/templates
 
-# Set environment variable for Flask
-ENV FLASK_TEMPLATE_FOLDER /app/templates
-
-# Start the application
 CMD ["python", "upload-song-app.py"]

@@ -26,6 +26,8 @@ services:
       - microservices-network
 
   upload-song:
+    build:
+      context: ./UploadSong
     image: maflus/upload-song:latest
     container_name: upload-song-container
     ports:
