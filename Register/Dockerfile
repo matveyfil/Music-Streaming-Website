@@ -26,7 +26,7 @@ USER myuser
 EXPOSE 5003
 
 # Set environment variable for Flask
-ENV FLASK_TEMPLATE_FOLDER /app/templates
+ENV FLASK_TEMPLATE_FOLDER=/app/templates
 
 # Start the application
 CMD ["python", "reg-log-app.py"]

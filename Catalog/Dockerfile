@@ -26,8 +26,8 @@ RUN echo $PATH
 RUN which pytest || true
 RUN ls -la /usr/local/bin/
 
-# Copy tests directory
-COPY tests /app/tests
+# # Copy tests directory
+# COPY tests /app/tests
 
 # Create a non-privileged user
 RUN useradd -m myuser && chown -R myuser /app
@@ -37,7 +37,8 @@ USER myuser
 EXPOSE 5000
 
 # Set environment variable for Flask
-ENV FLASK_TEMPLATE_FOLDER /app/templates
+ENV FLASK_TEMPLATE_FOLDER=/app/templates
+
 
 # Start the application
 CMD ["python", "catalog-app.py"]
