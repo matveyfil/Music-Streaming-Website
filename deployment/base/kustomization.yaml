@@ -1,0 +1,31 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: deployment-project
+
+resources:
+  - secrets.yaml
+  - catalog-db-depl.yaml
+  - catalog-db-pv.yaml
+  - catalog-db-pvc.yaml
+  - catalog-db-svc.yaml
+  - catalog-depl.yaml
+  - catalog-svc.yaml
+  - homepage-depl.yaml
+  - homepage-svc.yaml
+  - reg-log-db-depl.yaml
+  - reg-log-db-pv.yaml
+  - reg-log-db-pvc.yaml
+  - reg-log-db-svc.yaml
+  - reg-log-depl.yaml
+  - reg-log-svc.yaml
+  - songs-history-depl.yaml
+  - songs-history-svc.yaml
+  - upload-song-db-depl.yaml
+  - upload-song-db-pv.yaml
+  - upload-song-db-pvc.yaml
+  - upload-song-db-svc.yaml
+  - upload-song-depl.yaml
+  - upload-song-svc.yaml
+  - upload-song-pv.yaml
+  - upload-song-pvc.yaml

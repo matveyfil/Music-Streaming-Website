@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: home-page
+  namespace: deployment-project
+spec:
+  selector:
+    matchLabels:
+      app: home-page
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: home-page
+    spec:
+      containers:
+      - name: home-page-container
+        image: maflus/home-page:latest
+        ports:
+        - containerPort: 5000
+        env:
+          - name: SECRET_KEY
+            valueFrom:
+              secretKeyRef:
+                name: app-secret
+                key: home-page-password
+        resources:
+          requests:
+            cpu: "100m"
+            memory: "100Mi"
+          limits:
+            cpu: "200m"
+            memory: "200Mi"

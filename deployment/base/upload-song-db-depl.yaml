@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: upload-song-db
+  namespace: deployment-project
+spec:
+  selector:
+    matchLabels:
+      app: upload-song-db
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: upload-song-db
+    spec:
+      containers:
+      - name: upload-song-db-container
+        image: redis:alpine
+        ports:
+        - containerPort: 6379
+        resources:
+          requests:
+            cpu: "100m"
+            memory: "100Mi"
+          limits:
+            cpu: "200m"
+            memory: "200Mi"
+        volumeMounts:
+        - name: upload-song-db-storage
+          mountPath: /data
+      volumes:
+      - name: upload-song-db-storage
+        persistentVolumeClaim:
+          claimName: upload-song-db-pvc

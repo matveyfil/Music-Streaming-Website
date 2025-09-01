@@ -1,0 +1,23 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+# Base directory with common manifests
+resources:
+  - ../../base
+
+# Overriding images for development
+images:
+  - name: catalog
+    newName: maflus/catalog
+    newTag: dev
+
+# Defining specific secrets for development
+secretGenerator:
+  - name: dev-secrets
+    literals:
+      - SECRET_KEY=dev-secret-key
+
+# Overriding the number of replicas for development
+replicas:
+  - name: catalog-container
+    count: 1

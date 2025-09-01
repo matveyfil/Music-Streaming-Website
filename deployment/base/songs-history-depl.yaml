@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: songs-history
+  namespace: deployment-project
+spec:
+  selector:
+    matchLabels:
+      app: songs-history
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: songs-history
+    spec:
+      containers:
+      - name: songs-history-container
+        image: maflus/songs-history:latest
+        ports:
+        - containerPort: 5000
+        env:
+          - name: SECRET_KEY
+            valueFrom:
+              secretKeyRef:
+                name: app-secret
+                key: songs-history-password
+        resources:
+          requests:
+            cpu: "100m"
+            memory: "100Mi"
+          limits:
+            cpu: "200m"
+            memory: "200Mi"

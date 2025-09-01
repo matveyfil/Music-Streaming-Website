@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: upload-song
+  namespace: deployment-project
+spec:
+  selector:
+    matchLabels:
+      app: upload-song
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: upload-song
+    spec:
+      containers:
+      - name: upload-song-container
+        image: maflus/upload-song:latest
+        ports:
+        - containerPort: 5000
+        env:
+          - name: SECRET_KEY
+            valueFrom:
+              secretKeyRef:
+                name: app-secret
+                key: upload-song-password
+        volumeMounts:
+        - name: song-storage
+          mountPath: /app/static/songs
+        resources:
+          requests:
+            cpu: "100m"
+            memory: "100Mi"
+          limits:
+            cpu: "200m"
+            memory: "200Mi"
+      volumes:
+      - name: song-storage
+        persistentVolumeClaim:
+          claimName: upload-song-pvc

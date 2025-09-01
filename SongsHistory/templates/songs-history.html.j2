@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>History of Songs</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .navbar {
+            background-color: #333;
+            color: white;
+            padding: 15px;
+            text-align: center;
+        }
+        .navbar button {
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            margin: 4px 2px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .navbar button:hover {
+            background-color: #45a049;
+        }
+        .container {
+            padding: 16px;
+            text-align: center;
+            width: 80%;
+            margin: auto;
+        }
+        h1 {
+            color: #333;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: auto;
+        }
+        li {
+            background-color: white;
+            margin: 8px auto;
+            padding: 12px;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <button onclick="window.location.href='/home';">HomePage</button>
+        <button onclick="window.location.href='/catalog';">Songs</button>
+        <button onclick="window.location.href='/upload';">Upload Songs</button>
+        <button onclick="window.location.href='/history';">Songs history</button>
+        <button onclick="window.location.href='/logout';">Logout</button>
+    </div>
+    <div class="container">
+        <h1>History of Songs</h1>
+        <ul>
+            {% for entry in songs %}
+                <li>{{ loop.index }}: {{ entry.title }} by {{ entry.user }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>

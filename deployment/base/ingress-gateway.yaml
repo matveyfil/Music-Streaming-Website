@@ -1,0 +1,82 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: music-streaming-ingress
+  namespace: deployment-project
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/use-regex: "true"
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /home
+        pathType: Prefix
+        backend:
+          service:
+            name: home-page
+            port:
+              number: 80
+      - path: /login
+        pathType: Prefix
+        backend:
+          service:
+            name: register-login
+            port:
+              number: 5000
+      - path: /register
+        pathType: Prefix
+        backend:
+          service:
+            name: register-login
+            port:
+              number: 5000
+      - path: /logout
+        pathType: Prefix
+        backend:
+          service:
+            name: register-login
+            port:
+              number: 5000
+      - path: /images
+        pathType: Prefix
+        backend:
+          service:
+            name: home-page
+            port:
+              number: 80
+      - path: /catalog
+        pathType: Prefix
+        backend:
+          service:
+            name: catalog-container
+            port:
+              number: 80
+      - path: /song/(.+)
+        pathType: ImplementationSpecific
+        backend:
+          service:
+            name: catalog-container
+            port:
+              number: 80
+      - path: /upload
+        pathType: Prefix
+        backend:
+          service:
+            name: upload-song
+            port:
+              number: 80
+      - path: /static/songs
+        pathType: Prefix
+        backend:
+          service:
+            name: upload-song
+            port:
+              number: 80
+      - path: /history
+        pathType: Prefix
+        backend:
+          service:
+            name: songs-history
+            port:
+              number: 80

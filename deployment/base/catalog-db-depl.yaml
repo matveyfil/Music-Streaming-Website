@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: catalog-db
+  namespace: deployment-project
+spec:
+  selector:
+    matchLabels:
+      app: catalog-db
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: catalog-db
+    spec:
+      containers:
+      - name: catalog-container
+        image: maflus/catalog:latest
+        ports:
+        - containerPort: 5000
+        env:
+          - name: REDIS_HOST
+            value: "catalog-db"
+        resources:
+          requests:
+            cpu: "100m"
+            memory: "100Mi"
+          limits:
+            cpu: "200m"
+            memory: "200Mi"

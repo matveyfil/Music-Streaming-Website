@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ song.title }} - Song Details</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .navbar {
+            background-color: #333;
+            color: white;
+            padding: 15px;
+            text-align: center;
+        }
+        .navbar button {
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            margin: 4px 2px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .navbar button:hover {
+            background-color: #45a049;
+        }
+        .container {
+            padding: 16px;
+            text-align: center;
+        }
+        h1 {
+            color: #333;
+        }
+        p {
+            color: #555;
+            font-size: 16px;
+            line-height: 1.6;
+        }
+        audio {
+            width: 100%;
+            margin-top: 8px;
+        }
+        button {
+            background-color: #4CAF50; /* Green */
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            margin: 10px 0;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <button onclick="window.location.href='/home';">HomePage</button>
+        <button onclick="window.location.href='/catalog';">Songs</button>
+        <button onclick="window.location.href='/upload';">Upload Songs</button>
+        <button onclick="window.location.href='/history';">Songs history</button>
+        <button onclick="window.location.href='/logout';">Logout</button>
+    </div>
+    <div class="container">
+        <h1>{{ song.title }}</h1>
+        <p><strong>Author:</strong> {{ song.author }}</p>
+        <p><strong>Year:</strong> {{ song.year }}</p>
+        <p><strong>Duration:</strong> {{ song.duration }}</p>
+        <audio controls src="{{ url_for('static', filename='songs/' + song.filename) }}">
+            Your browser does not support the audio tag.
+        </audio>
+        <button onclick="window.location.href='/catalog';">Back to Catalog</button>
+    </div>
+</body>
+</html>

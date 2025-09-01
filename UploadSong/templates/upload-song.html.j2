@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Upload New Song</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .navbar {
+            background-color: #333;
+            color: white;
+            padding: 15px;
+            text-align: center;
+        }
+        .navbar button {
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            margin: 4px 2px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .navbar button:hover {
+            background-color: #45a049;
+        }
+        .container {
+            padding: 16px;
+            text-align: center;
+        }
+        h1 {
+            color: #333;
+        }
+        form {
+            background-color: white;
+            margin: 20px auto;
+            padding: 20px;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            width: 80%;
+        }
+        input[type="file"] {
+            margin: 10px 0;
+        }
+        input[type="submit"] {
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            margin: 4px 2px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <button onclick="window.location.href='/home';">HomePage</button>
+        <button onclick="window.location.href='/catalog';">Songs</button>
+        <button onclick="window.location.href='/upload';">Upload Songs</button>
+        <button onclick="window.location.href='/history';">Songs history</button>
+        <button onclick="window.location.href='/logout';">Logout</button>
+    </div>
+    <div class="container">
+        <h1>Upload New Song</h1>
+        <form action="{{ url_for('upload_song') }}" method="post" enctype="multipart/form-data">
+            <input type="file" name="file" accept=".mp3,.wav,.ogg"><br>
+            <input type="text" name="song_name" placeholder="Song Name (optional)">
+            <input type="text" name="author" placeholder="Author" required>
+            <input type="text" name="duration" placeholder="Duration (e.g., 3:45)" required>
+            <input type="text" name="year" placeholder="Year" required>
+            <input type="submit" value="Upload Song">
+        </form>
+    </div>
+</body>
+</html>

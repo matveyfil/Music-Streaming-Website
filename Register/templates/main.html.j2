@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Music Streaming Site - Login/Register</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            padding: 16px;
+            text-align: center;
+            width: 350px;
+        }
+        h1 {
+            color: #333;
+        }
+        form {
+            background-color: white;
+            padding: 20px;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            width: 100%;
+            margin-top: 16px;
+        }
+        input[type="text"], input[type="password"], input[type="email"], input[type="submit"] {
+            padding: 10px;
+            margin: 10px 0;
+            display: block;
+            width: calc(100% - 20px);
+        }
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+        .message {
+            color: #d00;
+        }
+        .toggle-form {
+            cursor: pointer;
+            color: #06f;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome!</h1>
+        <p>Explore our vast collection of music. Enjoy the rhythm!</p>
+        <div>
+            {% if message %}
+                <div class="message">{{ message }}</div>
+            {% endif %}
+        </div>
+
+        <div id="loginForm">
+            <form method="post" action="/login">
+                <input type="text" id="username" name="username" placeholder="Username">
+                <input type="password" id="password" name="password" placeholder="Password">
+                <input type="submit" value="Login">
+            </form>
+            <p class="toggle-form" onclick="showForm('registerForm')">Don't have an account? Create</p>
+        </div>
+
+        <div id="registerForm" style="display:none;">
+            <form method="post" action="/register">
+                <input type="text" id="username" name="username" placeholder="Username">
+                <input type="email" id="email" name="email" placeholder="Email">
+                <input type="email" id="repeat_email" name="repeat_email" placeholder="Repeat Email">
+                <input type="password" id="password" name="password" placeholder="Password">
+                <input type="submit" value="Register">
+            </form>
+            <p class="toggle-form" onclick="showForm('loginForm')">Already have an account? Login</p>
+        </div>
+    </div>
+
+    <script>
+        function showForm(formId) {
+            var loginForm = document.getElementById('loginForm');
+            var registerForm = document.getElementById('registerForm');
+            
+            if(formId === 'loginForm') {
+                loginForm.style.display = 'block';
+                registerForm.style.display = 'none';
+            } else if(formId === 'registerForm') {
+                loginForm.style.display = 'none';
+                registerForm.style.display = 'block';
+            }
+        }
+    </script>
+</body>
+</html>

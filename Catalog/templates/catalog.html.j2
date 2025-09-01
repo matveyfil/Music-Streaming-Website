@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>List of Songs</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .navbar {
+            background-color: #333;
+            color: white;
+            padding: 15px;
+            text-align: center;
+        }
+        .navbar button {
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            margin: 4px 2px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .navbar button:hover {
+            background-color: #45a049;
+        }
+        .container {
+            padding: 16px;
+            text-align: center;
+        }
+        h1 {
+            color: #333;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        li {
+            background-color: white;
+            margin: 8px auto;
+            padding: 12px;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            width: 80%;
+            margin-bottom: 20px;
+        }
+        form {
+            margin: 20px auto;
+            width: 80%;
+        }
+        input[type="text"], button[type="submit"] {
+            padding: 10px;
+            margin: 5px 0;
+            display: block;
+            width: 95%;
+        }
+        button[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+        button[type="submit"]:hover {
+            background-color: #45a049;
+        }
+        .play-link {
+            display: inline-block;
+            padding: 8px 16px;
+            margin: 4px 2px;
+            background-color: #4CAF50;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: bold;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+        .play-link:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <button onclick="window.location.href='/home';">HomePage</button>
+        <button onclick="window.location.href='/catalog';">Songs</button>
+        <button onclick="window.location.href='/upload';">Upload Songs</button>
+        <button onclick="window.location.href='/history';">Songs history</button>
+        <button onclick="window.location.href='/logout';">Logout</button>
+    </div>
+    <div class="container">
+        <h1>Songs</h1>
+        <form action="/catalog" method="get">
+            <input type="text" name="search" placeholder="Search songs...">
+            <button type="submit">Search</button>
+        </form>
+        {% if songs %}
+            <ul>
+                {% for song in songs %}
+                    <li>
+                        {{ song.title }} ({{ song.duration }} seconds)
+                        <a href="/song/{{ song.filename }}" class="play-link">Play</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No songs found.</p>
+        {% endif %}
+    </div>
+</body>
+</html>

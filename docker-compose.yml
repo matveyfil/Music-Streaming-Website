@@ -1,0 +1,74 @@
+version: '3.9'
+
+services:
+  catalog:
+    build:
+      context: ./Catalog
+    image: maflus/catalog:latest
+    container_name: catalog-container
+    environment:
+      - SECRET_KEY=43e7773873ae477e5a826985fb0937c3e0ab1976c6929b60
+    ports:
+      - "5001:5000"
+    volumes:
+      - ./UploadSong/static/songs:/app/static/songs
+    networks:
+      - microservices-network
+
+  register-login:
+    image: maflus/register-login:latest
+    container_name: register-login-container
+    environment:
+      - SECRET_KEY=43e7773873ae477e5a826985fb0937c3e0ab1976c6929b60
+    ports:
+      - "5003:5000"
+    networks:
+      - microservices-network
+
+  upload-song:
+    image: maflus/upload-song:latest
+    container_name: upload-song-container
+    ports:
+      - "5004:5000"
+    volumes:
+      - ./UploadSong/static/songs:/app/static/songs
+    networks:
+      - microservices-network
+
+  songs-history:
+    image: maflus/songs-history:latest
+    container_name: songs-history-container
+    ports:
+      - "5005:5000"
+    networks:
+      - microservices-network
+  
+  home-page:
+    image: maflus/home-page:latest
+    container_name: home-page-container
+    ports:
+      - "5000:5000"
+    networks:
+      - microservices-network
+
+  redis-db:
+    image: redis:alpine
+    container_name: redis-container
+    ports:
+      - "6379:6379"
+    networks:
+      - microservices-network
+  
+  gateway:
+    image: nginx:latest
+    container_name: gateway-container
+    ports:
+      - "85:80"
+    volumes:
+      - ./gateway/nginx.conf:/etc/nginx/nginx.conf
+    networks:
+      - microservices-network
+
+networks:
+  microservices-network:
+    driver: bridge

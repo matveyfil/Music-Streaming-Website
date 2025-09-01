@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: upload-song-db
+  namespace: deployment-project
+spec:
+  ports:
+  - port: 6379
+    targetPort: 6379
+  selector:
+    app: upload-song-db

@@ -1,0 +1,38 @@
+# Ignore all hidden files and directories
+.*
+
+# Ignoring dependency directories
+node_modules/
+__pycache__/
+.env
+
+# Ignoring log files and temporary files
+*.log
+*.tmp
+*.temp
+
+# Ignoring local configuration files
+*.env
+*.json
+
+# Ignoring documentation and markdown files
+*.md
+LICENSE
+Dockerfile*
+*.pdf
+*.yml
+
+# Ignoring IDE specific files and directories
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+
+# Ignoring testing files
+tests/
+*.spec.js
+*.test.js
+
+# Ignoring build files
+dist/
+build/

@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: register-login
+  namespace: deployment-project
+spec:
+  selector:
+    matchLabels:
+      app: register-login
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: register-login
+    spec:
+      containers:
+      - name: register-login-container
+        image: maflus/register-login:latest
+        ports:
+        - containerPort: 5000
+        env:
+          - name: SECRET_KEY
+            valueFrom:
+              secretKeyRef:
+                name: app-secret
+                key: reg-log-password
+          - name: REDIS_HOST
+            value: "reg-log-db"
+        resources:
+          requests:
+            cpu: "100m"
+            memory: "100Mi"
+          limits:
+            cpu: "200m"
+            memory: "200Mi"
