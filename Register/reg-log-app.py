@@ -103,10 +103,11 @@ def login():
                 return redirect('http://localhost:85/home')
             else:
                 #Password incorrect: Set error message
+                logger.warning(f"Login failed: invalid password for {username}")
                 message = 'Invalid password'
         else:
             #Username not found: Set error message
-            logger.warning(f"Login failed: invalid password for {username}")
+            logger.warning(f"Login failed: invalid username {username}")
             message = 'Invalid username'
             
         #Login failed: Re-render login form with error message
